@@ -1,0 +1,23 @@
+{
+  "name": "projecto_gedeao",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node build/server.js",
+    "start:dev": "tsx watch src/server.ts",
+    "tsup": "tsup src --out-dir build --format esm"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.1.0",
+    "@fastify/multipart": "^9.2.1",
+    "@fastify/static": "^8.2.0",
+    "axios": "^1.12.2",
+    "fastify": "^5.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.9.1",
+    "tsup": "^8.5.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.7.3"
+  }
+}
