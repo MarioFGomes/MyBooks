@@ -88,7 +88,7 @@ document.querySelector('#order-btn2').addEventListener('click', () => {
                     <label for="file">Arquivo PDF:</label>
                     <input type="file" id="file" name="file" accept="application/pdf" required>
                 </div>
-                <input type="submit" value="Enviar Livro" class="submit">
+                <input type="submit" value="Publicar" class="submit">
             `;
             document.body.appendChild(bookForm);
 
