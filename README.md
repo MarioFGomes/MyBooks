@@ -1,24 +1,70 @@
-📚 Projecto Gedeão – Livraria Virtual
+## 📚 Livraria Virtual — Fastify + Prisma + Frontend Moderno
 
-Uma livraria virtual completa, desenvolvida com Node.js + TypeScript + Fastify + Prisma no backend e HTML + CSS + JavaScript (Axios) no frontend.
+Uma aplicação web completa para gestão de livros digitais (eBooks), onde é possível visualizar, fazer download, carregar, editar e excluir livros em formato PDF.
+O projeto utiliza Fastify (Node.js) no backend e uma interface web responsiva com HTML, CSS, JS e Axios no frontend.
 
-O sistema permite cadastrar livros, fazer upload de arquivos (PDFs) e permite fazer download de livros cadastrados com uma interface simples e moderna.
+# 🚀 Funcionalidades principais
 
-🚀 Funcionalidades
-🖥️ Front-end
+Funcionalidade	Descrição
 
-Interface amigável feita em HTML, CSS e JavaScript
+📖 Listagem de livros	Todos os livros cadastrados são exibidos com título, autor e descrição.
+📥 Download de PDF	Qualquer visitante pode baixar os eBooks diretamente.
+🔐 Login de administrador	Apenas o administrador pode cadastrar, editar e excluir livros.
+📤 Upload de livros	Envia e armazena novos livros (PDF) com título, autor e descrição.
+✏️ Editar livros	Atualiza os dados de livros existentes (título, autor, descrição).
+🗑️ Excluir livros	Remove um livro e o seu PDF associado do servidor.
+💾 Persistência com Prisma	Todos os dados são guardados numa base de dados relacional (SQLite ou PostgreSQL).
 
-Formulário de envio com título, autor, categoria, descrição e arquivo PDF
+# 🧩 Stack Tecnológica
 
-Integração com o backend via Axios
+Backend:
 
-⚙️ Back-end
+Fastify
+ — servidor rápido e moderno para Node.js
 
-API REST feita com Fastify
+Prisma ORM
+ — ORM para acesso à base de dados
 
-Upload de arquivos com suporte a multipart/form-data
+TypeScript
+ — suporte opcional a tipagem
 
-Banco de dados via Prisma ORM
+Multer/Fastify Multipart
+ — upload de arquivos
 
-Armazenamento de arquivos locais e metadados na base
+Node.js FS
+ — manipulação de ficheiros PDF
+
+Frontend:
+
+HTML5, CSS3 e JavaScript puro
+
+Axios
+ — comunicação assíncrona com o backend
+
+Interface limpa e responsiva
+
+Animações suaves (fade-in / fade-out)
+
+# 🛠️ Instalação e Configuração
+
+1️⃣ Clonar o projeto
+git clone https://github.com/teu-usuario/livraria-virtual.git
+cd livraria-virtual
+
+2️⃣ Instalar dependências
+npm install
+
+3️⃣ Configurar a base de dados
+O projeto usa Prisma ORM.
+Podes editar o arquivo .env com o tipo de BD que preferes:
+DATABASE_URL="file:./dev.db"   # SQLite (padrão)
+
+Depois roda:
+
+npx prisma migrate dev --name init
+
+4️⃣ Iniciar o servidor
+npm run dev
+
+O servidor estará disponível em:
+👉 http://localhost:3000
