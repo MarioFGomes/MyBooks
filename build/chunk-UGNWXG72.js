@@ -1,111 +1,94 @@
-import { FastifyReply, FastifyRequest } from "fastify";
+// src/controllers/BookControllers.ts
 import fs from "fs";
 import path from "path";
 import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
-
-const documentDir = path.resolve("document");
+var prisma = new PrismaClient();
+var documentDir = path.resolve("document");
 if (!fs.existsSync(documentDir)) fs.mkdirSync(documentDir);
-
-export class BookController {
+var BookController = class {
   // 📤 Upload de livro
-  static async upload(req: FastifyRequest, reply: FastifyReply) {
+  static async upload(req, reply) {
     try {
       let title = "";
       let author = "";
       let description = "";
       let filename = "";
-
-      for await (const part of (req as any).parts()) {
+      for await (const part of req.parts()) {
         if (part.file) {
           filename = part.filename;
           const filePath = path.join(documentDir, filename);
           await fs.promises.writeFile(filePath, await part.toBuffer());
-          console.log("📄 Arquivo salvo:", filePath);
+          console.log("\u{1F4C4} Arquivo salvo:", filePath);
         } else {
           if (part.fieldname === "title") title = part.value;
           if (part.fieldname === "author") author = part.value;
           if (part.fieldname === "description") description = part.value;
         }
       }
-
       const book = await prisma.book.create({
-        data: { title, author, description, pdfPath: filename },
+        data: { title, author, description, pdfPath: filename }
       });
-
-      console.log("✅ Livro salvo na BD:", book);
+      console.log("\u2705 Livro salvo na BD:", book);
       reply.send({ success: true, book });
     } catch (err) {
-      console.error("❌ Erro ao salvar livro:", err);
+      console.error("\u274C Erro ao salvar livro:", err);
       reply.status(500).send({ error: err instanceof Error ? err.message : String(err) });
     }
   }
-
   // 📚 Listar todos os livros
-  static async list(req: FastifyRequest, reply: FastifyReply) {
+  static async list(req, reply) {
     try {
       const books = await prisma.book.findMany({ orderBy: { id: "desc" } });
       reply.send(books);
     } catch (err) {
-      console.error("❌ Erro ao listar livros:", err);
+      console.error("\u274C Erro ao listar livros:", err);
       reply.status(500).send({ error: "Falha ao listar livros" });
     }
   }
-
   // ✏️ Atualizar livro
-  static async update(req: FastifyRequest, reply: FastifyReply) {
+  static async update(req, reply) {
     try {
-      const { id } = req.params as { id: string };
-      const { title, author, description } = req.body as {
-        title: string;
-        author: string;
-        description: string;
-      };
-
+      const { id } = req.params;
+      const { title, author, description } = req.body;
       const bookExists = await prisma.book.findUnique({ where: { id: Number(id) } });
       if (!bookExists) {
-        reply.status(404).send({ error: "Livro não encontrado" });
+        reply.status(404).send({ error: "Livro n\xE3o encontrado" });
         return;
       }
-
       const updated = await prisma.book.update({
         where: { id: Number(id) },
-        data: { title, author, description },
+        data: { title, author, description }
       });
-
-      console.log("📝 Livro atualizado:", updated);
+      console.log("\u{1F4DD} Livro atualizado:", updated);
       reply.send({ success: true, updated });
     } catch (err) {
-      console.error("❌ Erro ao atualizar livro:", err);
+      console.error("\u274C Erro ao atualizar livro:", err);
       reply.status(500).send({ error: "Falha ao atualizar livro" });
     }
   }
-
   // 🗑️ Excluir livro
-  static async delete(req: FastifyRequest, reply: FastifyReply) {
+  static async delete(req, reply) {
     try {
-      const { id } = req.params as { id: string };
-
+      const { id } = req.params;
       const book = await prisma.book.findUnique({ where: { id: Number(id) } });
       if (!book) {
-        reply.status(404).send({ error: "Livro não encontrado" });
+        reply.status(404).send({ error: "Livro n\xE3o encontrado" });
         return;
       }
-
-      // Remove arquivo PDF do servidor
       const filePath = path.join(documentDir, book.pdfPath);
       if (fs.existsSync(filePath)) {
         await fs.promises.unlink(filePath);
-        console.log("🗑️ PDF removido:", filePath);
+        console.log("\u{1F5D1}\uFE0F PDF removido:", filePath);
       }
-
       await prisma.book.delete({ where: { id: Number(id) } });
-
-      reply.send({ success: true, message: "Livro excluído com sucesso!" });
+      reply.send({ success: true, message: "Livro exclu\xEDdo com sucesso!" });
     } catch (err) {
-      console.error("❌ Erro ao excluir livro:", err);
+      console.error("\u274C Erro ao excluir livro:", err);
       reply.status(500).send({ error: "Falha ao excluir livro" });
     }
   }
-}
+};
+
+export {
+  BookController
+};

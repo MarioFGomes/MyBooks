@@ -1,6 +1,6 @@
 import {
   BookController
-} from "../chunk-W3WE23YX.js";
+} from "../chunk-UGNWXG72.js";
 export {
   BookController
 };
