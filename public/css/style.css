@@ -39,7 +39,7 @@
             color: #333;
         }
 
-        #logout-btn, #order-btn2, #order-btn3, #view-books-btn, .pdfUpload {
+        .order-btn, #logout-btn, #order-btn2, #order-btn3, #view-books-btn, .pdfUpload {
             background-color: #FF4820;
             color: #fff;
             padding: 12px 24px;
@@ -52,7 +52,8 @@
             height: 43px;
             margin-left: 5px;
         }
-        #logout-btn:hover, #order-btn2:hover, #view-books-btn:hover, #order-btn3:hover, .pdfUpload:hover {
+
+        .order-btn:hover, #logout-btn:hover, #order-btn2:hover, #view-books-btn:hover, #order-btn3:hover, .pdfUpload:hover {
             background-color: #ff3a12;
             transform: translateY(-1px);
             box-shadow: 0 8px 20px rgba(255,72,32,.35);
