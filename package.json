@@ -15,10 +15,12 @@
     "axios": "^1.12.2",
     "dotenv": "^17.2.3",
     "fastify": "^5.6.1",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.16.3",
     "sqlite": "^5.1.1"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.9.1",
     "prisma": "^6.18.0",
     "tsup": "^8.5.0",
